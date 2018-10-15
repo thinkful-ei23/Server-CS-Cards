@@ -3,6 +3,6 @@ const cscards = require('./../db/seed/cscards.json');
 
 const questionList = new LinkedList();
 
-cscards.foreach(card => questionList.insertlast(card));
+cscards.forEach(card => questionList.insertLast(card));
 
 module.exports = questionList;
