@@ -21,15 +21,10 @@ app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'common', {
 }));
 
 
-app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
-  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
-  if (req.method === 'OPTIONS') {
-      return res.sendStatus(204);
-  }
-  next();
-});
+const corsOption = { 
+  origin: true, methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true
+  }; app.use(cors(corsOption));
 /*======CORS Middleware=====*/
 // app.use(
 //   cors({
