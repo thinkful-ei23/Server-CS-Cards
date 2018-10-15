@@ -6,12 +6,21 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thinkful-ei23/Server-CS-Cards"
+  },
   "author": "John Cosgrove & Jacob MacInnis",
   "license": "MIT",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^6.1.0",
     "express": "^4.16.4",
+    "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.3.3",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
   }
 }

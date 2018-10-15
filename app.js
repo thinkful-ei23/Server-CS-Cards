@@ -3,31 +3,45 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 
 const { PORT, MONGODB_URI } = require('./config');
+const passport = require('passport');
+const localStrategy = require('./passport/local');
+const jwtStrategy = require('./passport/jwt');
 
-/*========= Create Express Application ========*/
+/*=====Import Routers=====*/
+const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
+
+/*=========Create Express Application========*/
 const app = express();
 
-/*======== Morgan Middleware to Log all requests =======*/
+/*========Morgan Middleware to Log all requests=======*/
 app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'common', {
   skip: () => process.env.NODE_ENV === 'test'
 }));
 
-/*======== Parse Request Body =======*/
+/*========Parse Request Body=======*/
 app.use(express.json());
 
-/*======= Routing =======*/
+/*======Utilize the given `stategy`=====*/
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+
+/*======Protect Endpoints Using JWT Strategy======*/
+const jwtAuth = passport.authenticate('jwt', { session: false, failWithError: true });
+
+/*=======Routing=======*/
 app.get('/api/test', (req, res) => res.send('Hello World!'));
 app.use('/api', usersRouter);
 app.use('/api', authRouter);
 
-/*======= Custom 404 Not Found route handler =======*/
+/*=======Custom 404 Not Found route handler=======*/
 app.use((req, res, next) => {
   const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-/*========== Custom Error Handler ==========*/
+/*==========Custom Error Handler==========*/
 app.use((err, req, res, next) => {
   if (err.status) {
     const errBody = Object.assign({}, err, { message: err.message });
@@ -38,7 +52,7 @@ app.use((err, req, res, next) => {
   }
 });
 
-/*======= Connect to DB and Listen for incoming connections =======*/
+/*====Connect to DB and Listen for incoming connections====*/
 
 if (process.env.NODE_ENV !== 'test') {
 
