@@ -99,7 +99,7 @@ router.post('/users', (req, res, next) => {
       return User.create({
         username,
         password: hash,
-        firsName: firstName.trim(),
+        firstName: firstName.trim(),
         lastName: lastName.trim()
       });
     }) 
