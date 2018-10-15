@@ -8,8 +8,8 @@ const User = require('../models/user');
 const router = express.Router();
 
 router.post('/users', (req, res, next) => {
-  const { fullname, username, password } = req.body;
-  console.log()
+  const { firstName, lastName, username, password } = req.body;
+  console.log(firstName, lastName, username, password);
   const requiredFields = ['username', 'password'];
   const missingField = requiredFields.find(field => !(field in req.body));
 
@@ -21,7 +21,7 @@ router.post('/users', (req, res, next) => {
       location: missingField
     });
   }
-  const stringFields = ['username', 'password', 'fullname'];
+  const stringFields = ['username', 'password', 'firstname', 'lastname'];
   const nonStringField = stringFields.find(
     field => field in req.body && typeof req.body[field] !== 'string'
   );
@@ -35,7 +35,7 @@ router.post('/users', (req, res, next) => {
     });
   }
   
-  const explicityTrimmedFields = ['username', 'password'];
+  const explicityTrimmedFields = ['username', 'password', 'firstName', 'lastName'];
   const nonTrimmedField = explicityTrimmedFields.find(
     field => req.body[field].trim() !== req.body[field]
   );
@@ -99,7 +99,8 @@ router.post('/users', (req, res, next) => {
       return User.create({
         username,
         password: hash,
-        fullname: fullname.trim()
+        firsName: firstName.trim(),
+        lastName: lastName.trim()
       });
     }) 
     .then(result => {
