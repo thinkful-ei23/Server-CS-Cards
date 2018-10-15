@@ -1,8 +1,9 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
-const { PORT, MONGODB_URI } = require('./config');
+const { CLIENT_ORIGIN, PORT, MONGODB_URI } = require('./config');
 const passport = require('passport');
 const localStrategy = require('./passport/local');
 const jwtStrategy = require('./passport/jwt');
