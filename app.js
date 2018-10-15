@@ -19,6 +19,13 @@ app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'common', {
   skip: () => process.env.NODE_ENV === 'test'
 }));
 
+/*======CORS Middleware=====*/
+app.use(
+  cors({
+    origin: CLIENT_ORIGIN
+  })
+);
+
 /*========Parse Request Body=======*/
 app.use(express.json());
 
