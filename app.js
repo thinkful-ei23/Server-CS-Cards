@@ -20,12 +20,22 @@ app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'common', {
   skip: () => process.env.NODE_ENV === 'test'
 }));
 
+
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
+  if (req.method === 'OPTIONS') {
+      return res.sendStatus(204);
+  }
+  next();
+});
 /*======CORS Middleware=====*/
-app.use(
-  cors({
-    origin: CLIENT_ORIGIN
-  })
-);
+// app.use(
+//   cors({
+//     origin: CLIENT_ORIGIN
+//   })
+// );
 
 /*========Parse Request Body=======*/
 app.use(express.json());
