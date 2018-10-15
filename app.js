@@ -20,12 +20,17 @@ app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'common', {
   skip: () => process.env.NODE_ENV === 'test'
 }));
 
+
+const corsOption = { 
+  origin: true, methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true
+  }; app.use(cors(corsOption));
 /*======CORS Middleware=====*/
-app.use(
-  cors({
-    origin: CLIENT_ORIGIN
-  })
-);
+// app.use(
+//   cors({
+//     origin: CLIENT_ORIGIN
+//   })
+// );
 
 /*========Parse Request Body=======*/
 app.use(express.json());
