@@ -43,7 +43,7 @@ router.post('/submit',(req,res,next)=>{
             res.json({
                 result,
                 answer:'correct',
-                correctAnswer: questionList.head.value.answer})
+                correctAnswer: lastNode.value.answer})
         })
     }else{
         QuizStat.findOne({userId})
@@ -60,7 +60,7 @@ router.post('/submit',(req,res,next)=>{
         res.json({
             result,
             answer:'incorrect',
-            correctAnswer: questionList.head.value.answer})
+            correctAnswer: lastNode.head.value.answer})
         })
     }
 
