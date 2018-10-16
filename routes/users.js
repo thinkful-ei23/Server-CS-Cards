@@ -123,7 +123,7 @@ router.post('/stats',(req,res,next)=>{
   return User.findOne({username})
   .then(user =>{
     return QuizStat.create({
-      userId: user.id,
+      userId: user._id,
       recuringCorrect: 0,
       totalQuestions:0,
       quizStat:{}
