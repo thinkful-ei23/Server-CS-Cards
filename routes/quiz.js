@@ -18,11 +18,16 @@ router.get('/quiz',(req,res,next)=>{
 
 
 router.post('/submit',(req,res,next)=>{
+
     let {answer} = req.body
     const userId = req.user._id
     let data;
+    let lastNode = questionList.findLast()
+
     answer = answer.toLowerCase().trim(' ')
+
     if(questionList.head.value.answer === answer){
+
         return QuizStat.findOne({userId})
         .then((stats)=>{
             data = stats
@@ -30,6 +35,10 @@ router.post('/submit',(req,res,next)=>{
             stats.totalQuestions++
         })
         .then(()=>{
+            lastNode.next = questionList.head
+            questionList.head = questionList.head.next
+            lastNode.next = null
+
             res.json({
                 data,
                 answer:'correct',
@@ -42,15 +51,18 @@ router.post('/submit',(req,res,next)=>{
             stats.totalQuestions++
         })
         .then(()=>{
+
+            lastNode.next = questionList.head
+            questionList.head = questionList.head.next
+            lastNode.next = null
         res.json({
             data,
             answer:'incorrect',
             correctAnswer: questionList.head.value.answer})
         })
     }
-    const lastNode = questionList.findLast()
-    lastNode.next = questionList.head
-    questionList.head = questionList.head.next
+
+
 });
 
 router.get('/stats',(req,res,next)=>{
