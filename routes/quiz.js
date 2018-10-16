@@ -8,9 +8,10 @@ const router = express.Router();
 
 
 router.get('/quiz',(req,res,next)=>{
-    QuizStat.find({userId})
+    const userId = req.user._id
+    QuizStat.findOne({userId})
     .then(result=> {
-    res.json(result.head.value.question)
+        res.json(result.questions[result.head].question)
     });
 })
 
@@ -22,25 +23,41 @@ router.post('/submit',(req,res,next)=>{
     const userId = req.user._id
     let data;
     let list;
-    QuizStat.find({userId})
+    QuizStat.findOne({userId})
     .then(result=> {
-        list = result.questions
+        list = result
     });
-    let lastNode = list.findLast()
-    let questionNumber = list.head.value.number
+    let lastNode; 
+    for(let i = 0;l<list.questions.length;i++){
+        if(list.questions[i].next === null){
+            lastNode = i
+        }
+    }
 
     answer = answer.toLowerCase().trim(' ')
 
-    if(list.head.value.answer === answer){
+    if(list.questions[list.head].answer === answer){
 
         QuizStat.findOne({userId})
         .then((stats)=>{
-            if(!data.QuizStat[questionNumber]){
-                data.QuizStat[questionNumber]=list.head.value
-            }            
-            data.QuizStat[questionNumber].m = data.QuizStat[questionNumber].m*2
-
             data = stats
+            data.questions[data.head].m =data.questions[data.head].m*2
+            let posToInsert = data.questions[data.head].m
+            if(posToInsert > data.questions.length){
+                data.questions[data.head].m = data.questions.length
+                data.questions[lastNode].next = data.questions[data.head]
+            }
+            let currentNode = data.questions[data.head]
+            let count = 0
+            while(currentNode.next !== null){
+                if(count === posToInsert){
+                    currentNode.next = data.head
+                }else{
+                    currentNode = currentNode[currentNode.next]
+                    count++
+                }
+            }
+            
             data.recurringCorrect++
             data.totalQuestions++
             data.totalRight++

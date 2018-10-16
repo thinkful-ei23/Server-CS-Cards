@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 
 const User = require('../models/user');
 const QuizStat = require('../models/quizStat')
-const LinkedList = require('./../models/linked-list');
 const cscards = require('./../db/seed/cscards.json');
 
 const router = express.Router();
@@ -118,10 +117,18 @@ router.post('/users', (req, res, next) => {
     });
 });
 
-let questionList = new LinkedList
-cscards.forEach(card => questionList.insertLast(card))
 
 router.post('/stats',(req,res,next)=>{
+
+//   let questionList =[]
+// for(let i =0;i<cscards.length;i++){
+//   questionList.push(cscards[i])
+//   console.log(questionList, 'hope this works')
+// }
+// console.log(questionList,"hello world")
+
+
+
   const {username} = req.body
   return User.findOne({username})
   .then(user =>{
@@ -129,7 +136,8 @@ router.post('/stats',(req,res,next)=>{
       userId: user._id,
       recurringCorrect: 0,
       totalQuestions:0,
-      questions:questionList,
+      questions:cscards,
+      head:0,
       totalRight:0,
       quizStat:{}
     })
