@@ -45,6 +45,18 @@ class LinkedList {
     // found it
     return currNode;
   }
+
+  findLast(){
+    let currNode = this.head;
+    if(!this.head){
+      return null;
+    };
+    while(currNode.next !== null){
+      currNode = currNode.next;
+    };
+    return currNode;
+  };
+
   remove(item) {
     // if the list is empty
     if (!this.head) {

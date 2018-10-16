@@ -11,6 +11,8 @@ router.get('/quiz',(req,res,next)=>{
     res.json(questionList.head.value.question)
 })
 
+
+
 router.post('/submit',(req,res,next)=>{
     let {answer} = req.body
     answer = answer.toLowerCase().trim(' ')
@@ -19,5 +21,8 @@ router.post('/submit',(req,res,next)=>{
     }else{
         res.json({answer:'incorrect'})
     }
+    const lastNode = questionList.findLast()
+    lastNode.next = questionList.head
+    questionList.head = questionList.head.next
 })
 module.exports = router
