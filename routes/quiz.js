@@ -1,9 +1,6 @@
 'use strict';
 
 const express = require('express');
-const mongoose = require('mongoose');
-const questionList = require('../utils/create-linked-list')
-const passport = require('passport')
 const QuizStat = require('../models/quizStat')
 
 const router = express.Router();
@@ -11,7 +8,10 @@ const router = express.Router();
 
 
 router.get('/quiz',(req,res,next)=>{
-    res.json(questionList.head.value.question)
+    QuizStat.find({userId})
+    .then(result=> {
+    res.json(result.head.value.question)
+    });
 })
 
 
@@ -21,14 +21,25 @@ router.post('/submit',(req,res,next)=>{
     let {answer} = req.body
     const userId = req.user._id
     let data;
-    let lastNode = questionList.findLast()
+    let list;
+    QuizStat.find({userId})
+    .then(result=> {
+        list = result.questions
+    });
+    let lastNode = list.findLast()
+    let questionNumber = list.head.value.number
 
     answer = answer.toLowerCase().trim(' ')
 
-    if(questionList.head.value.answer === answer){
+    if(list.head.value.answer === answer){
 
         QuizStat.findOne({userId})
         .then((stats)=>{
+            if(!data.QuizStat[questionNumber]){
+                data.QuizStat[questionNumber]=list.head.value
+            }            
+            data.QuizStat[questionNumber].m = data.QuizStat[questionNumber].m*2
+
             data = stats
             data.recurringCorrect++
             data.totalQuestions++
@@ -36,8 +47,8 @@ router.post('/submit',(req,res,next)=>{
             return QuizStat.findOneAndUpdate({userId},data)
         })
         .then((result)=>{
-            lastNode.next = questionList.head
-            questionList.head = questionList.head.next
+            lastNode.next = list.head
+            list.head = list.head.next
             lastNode.next = null
 
             res.json({
@@ -48,14 +59,19 @@ router.post('/submit',(req,res,next)=>{
     }else{
         QuizStat.findOne({userId})
         .then((stats)=>{
+            if(!data.QuizStat[questionNumber]){
+                data.QuizStat[questionNumber]=list.head.value
+            }
+            data.QuizStat[questionNumber].m =1
+            
             data = stats
             data.recurringCorrect = 0
             data.totalQuestions++
             return QuizStat.findOneAndUpdate({userId},data)
         })
         .then((result)=>{
-            lastNode.next = questionList.head
-            questionList.head = questionList.head.next
+            lastNode.next = list.head
+            list.head = qlist.head.next
             lastNode.next = null
         res.json({
             result,
