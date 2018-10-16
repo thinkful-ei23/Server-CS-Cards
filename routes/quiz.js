@@ -60,7 +60,7 @@ router.post('/submit',(req,res,next)=>{
         res.json({
             result,
             answer:'incorrect',
-            correctAnswer: lastNode.head.value.answer})
+            correctAnswer: lastNode.value.answer})
         })
     }
 
