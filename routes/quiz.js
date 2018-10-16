@@ -19,7 +19,8 @@ router.post('/submit',(req,res,next)=>{
     if(questionList.head.value.answer === answer){
         res.json({answer:'correct'})
     }else{
-        res.json({answer:'incorrect'})
+        res.json({answer:'incorrect',
+            correctAnswer: questionList.head.value.answer})
     }
     const lastNode = questionList.findLast()
     lastNode.next = questionList.head
