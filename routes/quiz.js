@@ -20,9 +20,9 @@ router.get('/quiz',(req,res,next)=>{
 router.post('/submit',(req,res,next)=>{
     let {answer} = req.body
     const userId = req.user._id
+    let data;
     answer = answer.toLowerCase().trim(' ')
     if(questionList.head.value.answer === answer){
-        let data;
         return QuizStat.findOne({userId})
         .then((stats)=>{
             data = stats
