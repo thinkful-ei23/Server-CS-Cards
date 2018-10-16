@@ -119,14 +119,17 @@ router.post('/users', (req, res, next) => {
 });
 
 router.post('/stats',(req,res,next)=>{
-  const {user} = req.body
-
+  const {username} = req.body
+  return User.findOne({username})
+  .then(user =>{
     return QuizStat.create({
-      userId: user._id,
+      userId: user.id,
       recuringCorrect: 0,
       totalQuestions:0,
       quizStat:{}
     })
+  })
+    
   .then(result => {
     return res.status(201).location('/api/users/${result.id}').json(result);
   })
