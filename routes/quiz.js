@@ -71,7 +71,7 @@ router.get('/stats',(req,res,next)=>{
     const userId = req.user._id
     QuizStat.findOne({userId})
     .then(stats =>{
-        res.json({recurringCorrect: stats.recurringCorrect, totalQuestions:stats.totalQuestions})
+        res.json({recurringCorrect: stats.recurringCorrect, totalQuestions:stats.totalQuestions,totalRight:stats.totalRight})
     })
 
 })
