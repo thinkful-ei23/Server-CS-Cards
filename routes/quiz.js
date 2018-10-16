@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const questionList = require('../utils/create-linked-list')
 const passport = require('passport')
+const QuizStat = require('../models/quizStat')
 
 const router = express.Router();
 
@@ -18,7 +19,7 @@ router.get('/quiz',(req,res,next)=>{
 
 router.post('/submit',(req,res,next)=>{
     let {answer} = req.body
-    const userId = req.user.id
+    const userId = req.user._id
     answer = answer.toLowerCase().trim(' ')
     if(questionList.head.value.answer === answer){
         return QuizStat.findById({_id: userId})
@@ -51,7 +52,7 @@ router.post('/submit',(req,res,next)=>{
 });
 
 router.get('/stats',(req,res,next)=>{
-    const userId = req.user.id
+    const userId = req.user._id
     QuizStat.findById({_id:userId})
     .then(stats =>{
         res.json(stats)
