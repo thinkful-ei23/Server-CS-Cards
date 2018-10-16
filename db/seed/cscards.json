@@ -1,17 +1,17 @@
 [
   { 
     "number": 1,
-    "question": "This data structure follows First-In-First-Out methodology, i.e., the data item stored first will be accessed first",
+    "question": "A data structure follows First-In-First-Out methodology, i.e., the data item stored first will be accessed first",
     "answer": "queue"
   },
   { 
     "number": 2,
-    "question": "This is a data structure consisting of a collection of elements (values or variables), each identified by at least one index",
+    "question": "A data structure consisting of a collection of elements (values or variables), each identified by at least one index",
     "answer": "array"
   },
   {
     "number": 3,
-    "question": "This data structure follows a particular order in which the operations are performed.  The order is either LIFO(Last In First Out) or FILO(First In Last Out)",
+    "question": "A data structure follows a particular order in which the operations are performed.  The order is either LIFO(Last In First Out) or FILO(First In Last Out)",
     "answer": "stack"
   },
   {
@@ -31,12 +31,12 @@
   },
   {
     "number": 7,
-    "question": "This searching algorythm has a O(n) time complexity. It looks at each item in an array until it finds what you are looking for.",
+    "question": "A searching algorythm that has a O(n) time complexity. It looks at each item in an array until it finds what you are looking for.",
     "answer": "linear"
   }, 
   {
     "number": 8,
-    "question": "this searching algorythm has a O(log(n)) time complexity and splits the array range in half each time it checks an item. This algorythm only works with sorted arrays.",
+    "question": "Searching algorythm that has a O(log(n)) time complexity and splits the array range in half each time it checks an item. This algorythm only works with sorted arrays.",
     "answer": "binary"
   }, 
   {
@@ -51,17 +51,17 @@
   },
   {
     "number": 11,
-    "question": "This array sorting algorithm is sometimes called 'Sinking Sort'.  It iterates through an aray and compares two values, moving the larger to the right. It has a O notation of O(n^2).",
+    "question": "An array sorting algorithm is sometimes called 'Sinking Sort'.  It iterates through an aray and compares two values, moving the larger to the right. It has a O notation of O(n^2).",
     "answer": "bubble sort"
   },
   {
     "number": 12,
-    "question": "This sorting algorithm uses a divide and conquer approach.  It breaks the array down into continually smaller chunks, then merges them back together in the correct order. It has time complexity of O(nlog(n)). ",
+    "question": "A sorting algorithm that uses a divide and conquer approach.  It breaks the array down into continually smaller chunks, then merges them back together in the correct order. It has time complexity of O(nlog(n)). ",
     "answer": "merge sort"
   }, 
   {
     "number": 13,
-    "question": "This sorting algorithm uses divide and conquer approach. It can opperate within an array and does not need extra memory to store values.  It has an best and average case performace of O(nlog(n)) and worst case O(n^2)",
+    "question": "A sorting algorithm that uses divide and conquer approach. It can opperate within an array and does not need extra memory to store values.  It has an best and average case performace of O(nlog(n)) and worst case O(n^2)",
     "answer": "quicksort"
   }
 ]
