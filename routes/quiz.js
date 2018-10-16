@@ -28,35 +28,37 @@ router.post('/submit',(req,res,next)=>{
 
     if(questionList.head.value.answer === answer){
 
-        return QuizStat.findOne({userId})
+        QuizStat.findOne({userId})
         .then((stats)=>{
             data = stats
-            stats.recuringCorrect++
-            stats.totalQuestions++
+            data.recurringCorrect++
+            data.totalQuestions++
+            return QuizStat.findOneAndUpdate({userId},data)
         })
-        .then(()=>{
+        .then((result)=>{
             lastNode.next = questionList.head
             questionList.head = questionList.head.next
             lastNode.next = null
 
             res.json({
-                data,
+                result,
                 answer:'correct',
                 correctAnswer: questionList.head.value.answer})
         })
     }else{
         QuizStat.findOne({userId})
         .then((stats)=>{
-            stats.recurringCorrect = 0
-            stats.totalQuestions++
+            data = stats
+            data.recurringCorrect = 0
+            data.totalQuestions++
+            return QuizStat.findOneAndUpdate({userId},data)
         })
-        .then(()=>{
-
+        .then((result)=>{
             lastNode.next = questionList.head
             questionList.head = questionList.head.next
             lastNode.next = null
         res.json({
-            data,
+            result,
             answer:'incorrect',
             correctAnswer: questionList.head.value.answer})
         })
