@@ -17,7 +17,8 @@ router.post('/submit',(req,res,next)=>{
     let {answer} = req.body
     answer = answer.toLowerCase().trim(' ')
     if(questionList.head.value.answer === answer){
-        res.json({answer:'correct'})
+        res.json({answer:'correct',
+            correctAnswer: questionList.head.value.answer})
     }else{
         res.json({answer:'incorrect',
             correctAnswer: questionList.head.value.answer})
