@@ -106,7 +106,6 @@ router.post('/users', (req, res, next) => {
       });
     }) 
     .then(result => {
-      newUser = result
       return res.status(201).location('/api/users/${result.id}').json(result);
     })
     .catch(err => {

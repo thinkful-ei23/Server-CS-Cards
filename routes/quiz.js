@@ -22,8 +22,10 @@ router.post('/submit',(req,res,next)=>{
     const userId = req.user._id
     answer = answer.toLowerCase().trim(' ')
     if(questionList.head.value.answer === answer){
-        return QuizStat.findById({_id: userId})
+        let data;
+        return QuizStat.findOne({userId})
         .then((stats)=>{
+            data = stats
             stats.recuringCorrect++
             stats.totalQuestions++
         })
@@ -34,7 +36,7 @@ router.post('/submit',(req,res,next)=>{
                 correctAnswer: questionList.head.value.answer})
         })
     }else{
-        return QuizStat.findById({_id: userId})
+        QuizStat.findOne({userId})
         .then((stats)=>{
             stats.recuringCorrect = 0
             stats.totalQuestions++
@@ -53,9 +55,9 @@ router.post('/submit',(req,res,next)=>{
 
 router.get('/stats',(req,res,next)=>{
     const userId = req.user._id
-    QuizStat.findById({_id:userId})
+    QuizStat.findOne({userId})
     .then(stats =>{
-        res.json(stats)
+        res.json({recuringCorrect: stats.recuringCorrect, totalQuestions:stats.totalQuestions})
     })
 
 })
