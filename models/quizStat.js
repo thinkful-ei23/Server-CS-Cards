@@ -4,6 +4,8 @@ const quizStatSchema = new mongoose.Schema({
     userId:{type: mongoose.Schema.Types.ObjectId, ref:'User',required:true},
     recurringCorrect: {type: Number},
     totalQuestions :{type: Number},
+    totalRight:{type:Number},
+    percentageRight:{type: Number},
     questions:{type:Array},
     quizStat: {type: Object}
 });

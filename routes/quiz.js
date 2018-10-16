@@ -8,7 +8,6 @@ const QuizStat = require('../models/quizStat')
 
 const router = express.Router();
 
-router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
 
 
 router.get('/quiz',(req,res,next)=>{
@@ -33,6 +32,7 @@ router.post('/submit',(req,res,next)=>{
             data = stats
             data.recurringCorrect++
             data.totalQuestions++
+            data.totalRight++
             return QuizStat.findOneAndUpdate({userId},data)
         })
         .then((result)=>{
