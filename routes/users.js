@@ -1,7 +1,6 @@
 'use strict';
 
 const express = require('express');
-const mongoose = require('mongoose');
 
 const User = require('../models/user');
 const QuizStat = require('../models/quizStat')
@@ -11,7 +10,6 @@ const router = express.Router();
 
 router.post('/users', (req, res, next) => {
   const { firstName, lastName, username, password } = req.body;
-  console.log(firstName, lastName, username, password);
   const requiredFields = ['username', 'password'];
   const missingField = requiredFields.find(field => !(field in req.body));
 
@@ -117,19 +115,9 @@ router.post('/users', (req, res, next) => {
     });
 });
 
-
 router.post('/stats',(req,res,next)=>{
 
-//   let questionList =[]
-// for(let i =0;i<cscards.length;i++){
-//   questionList.push(cscards[i])
-//   console.log(questionList, 'hope this works')
-// }
-// console.log(questionList,"hello world")
-
-
-
-  const {username} = req.body
+  const {username} = req.body;
   return User.findOne({username})
   .then(user =>{
     return QuizStat.create({
