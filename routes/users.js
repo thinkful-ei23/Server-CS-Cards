@@ -83,7 +83,6 @@ router.post('/users', (req, res, next) => {
     });
   }
 
-  let newUser;
   return User.find({ username })
     .count()
     .then(count => {
@@ -140,5 +139,7 @@ router.post('/stats',(req,res,next)=>{
     next(err);
   });
 })
+
+
 
 module.exports = router;
