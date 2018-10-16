@@ -122,7 +122,7 @@ router.post('/stats',(req,res,next)=>{
   .then(user =>{
     return QuizStat.create({
       userId: user._id,
-      recuringCorrect: 0,
+      recurringCorrect: 0,
       totalQuestions:0,
       quizStat:{}
     })

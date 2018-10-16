@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const quizStatSchema = new mongoose.Schema({
     userId:{type: mongoose.Schema.Types.ObjectId, ref:'User',required:true},
-    recuringCorrect: {type: Number},
+    recurringCorrect: {type: Number},
     totalQuestions :{type: Number},
     questions:{type:Array},
     quizStat: {type: Object}

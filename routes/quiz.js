@@ -38,7 +38,7 @@ router.post('/submit',(req,res,next)=>{
     }else{
         QuizStat.findOne({userId})
         .then((stats)=>{
-            stats.recuringCorrect = 0
+            stats.recurringCorrect = 0
             stats.totalQuestions++
         })
         .then(()=>{
@@ -57,7 +57,7 @@ router.get('/stats',(req,res,next)=>{
     const userId = req.user._id
     QuizStat.findOne({userId})
     .then(stats =>{
-        res.json({recuringCorrect: stats.recuringCorrect, totalQuestions:stats.totalQuestions})
+        res.json({recurringCorrect: stats.recurringCorrect, totalQuestions:stats.totalQuestions})
     })
 
 })
