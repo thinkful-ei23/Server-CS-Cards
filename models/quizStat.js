@@ -5,7 +5,6 @@ const quizStatSchema = new mongoose.Schema({
     recurringCorrect: {type: Number},
     totalQuestions :{type: Number},
     totalRight:{type:Number},
-    percentageRight:{type: Number},
     questions:{type:Array},
     quizStat: {type: Object}
 });
