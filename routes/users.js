@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const User = require('../models/user');
+const QuizStat = require('../models/quizStat')
 
 const router = express.Router();
 
@@ -81,6 +82,8 @@ router.post('/users', (req, res, next) => {
       location: tooSmallField || tooLargeField
     });
   }
+
+  let newUser;
   return User.find({ username })
     .count()
     .then(count => {
@@ -104,6 +107,7 @@ router.post('/users', (req, res, next) => {
       });
     }) 
     .then(result => {
+      newUser = result
       return res.status(201).location('/api/users/${result.id}').json(result);
     })
     .catch(err => {
@@ -113,5 +117,26 @@ router.post('/users', (req, res, next) => {
       next(err);
     });
 });
+
+router.post('/stats',(req,res,next)=>{
+  const {user} = req.body
+
+    return QuizStat.create({
+      userId: user._id,
+      recuringCorrect: 0,
+      totalQuestions:0,
+      quizStat:{}
+    })
+  .then(result => {
+
+    return res.status(201).location('/api/users/${result.id}').json(result);
+  })
+  .catch(err => {
+    if (err.reason === 'ValidationError') {
+      return res.status(err.code).json(err);
+    }
+    next(err);
+  });
+})
 
 module.exports = router;
