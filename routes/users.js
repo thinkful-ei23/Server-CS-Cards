@@ -124,6 +124,7 @@ router.post('/stats',(req,res,next)=>{
       userId: user._id,
       recurringCorrect: 0,
       totalQuestions:0,
+      totalRight:0,
       quizStat:{}
     })
   })
