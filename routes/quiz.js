@@ -39,24 +39,20 @@ router.post('/submit',(req,res,next)=>{
   let { answer } = req.body;
   answer = answer.toLowerCase().trim(' ');
   const userId = req.user._id;
-  let quizStats;
   let response;
   let correctAnswer;
+	
   QuizStat.findOne({ userId })
     .then( userQuizData => {
-      quizStats = userQuizData;
-      
-      let quizStatsHead = quizStats.head;
-      
-        
+      let quizStatsHead = userQuizData.head;
       let currentHead = userQuizData.head; // 0
       let answeredQuestion = userQuizData.questions[currentHead];
       userQuizData.head = answeredQuestion.next;
       let answeredQuestionIndex = currentHead;
-      if ( quizStats.questions[quizStatsHead].answer == answer ) {
+      if ( userQuizData.questions[quizStatsHead].answer == answer ) {
         answeredQuestion.m *= 2;
-        if (answeredQuestion.m >= quizStats.questions.length) {
-          answeredQuestion.m = quizStats.questions.length;
+        if (answeredQuestion.m >= userQuizData.questions.length) {
+          answeredQuestion.m = userQuizData.questions.length;
         }
         answer = 'correct';
         userQuizData.totalRight++;
