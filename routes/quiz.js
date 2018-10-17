@@ -1,6 +1,5 @@
 'use strict';
 const express = require('express');
-const mongoose = require('mongoose');
 const QuizStat = require('../models/quizStat');
 
 const router = express.Router();
