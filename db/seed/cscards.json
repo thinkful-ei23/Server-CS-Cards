@@ -1,7 +1,7 @@
 [
   { 
     "number": 1,
-    "question": "A data structure follows First-In-First-Out methodology, i.e., the data item stored first will be accessed first",
+    "question": "A data structure that follows First-In-First-Out methodology, i.e., the data item stored first will be accessed first",
     "answer": "queue",
     "next":1,
     "m":1
@@ -15,7 +15,7 @@
   },
   {
     "number": 3,
-    "question": "A data structure follows a particular order in which the operations are performed.  The order is either LIFO(Last In First Out) or FILO(First In Last Out)",
+    "question": "A data structure that follows a particular order in which the operations are performed.  The order is either LIFO(Last In First Out) or FILO(First In Last Out)",
     "answer": "stack",
     "next":3,
     "m":1
@@ -71,7 +71,7 @@
   },
   {
     "number": 11,
-    "question": "An array sorting algorithm is sometimes called 'Sinking Sort'.  It iterates through an aray and compares two values, moving the larger to the right. It has a O notation of O(n^2).",
+    "question": "An array sorting algorithm (sometimes called 'Sinking Sort') that iterates through an aray and compares two values, moving the larger to the right. It has a O notation of O(n^2).",
     "answer": "bubble sort",
     "next":11,
     "m":1
