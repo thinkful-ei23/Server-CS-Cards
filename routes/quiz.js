@@ -10,6 +10,12 @@ router.get('/quiz',(req,res,next)=>{
   QuizStat.findOne({userId})
     .then(result=> {
       res.json(result.questions[result.head].question);
+    })
+    .catch(err => {
+      if (err.reason === 'Error GET /quiz') {
+        return res.status(err.code).json(err);
+      }
+      next(err);
     });
 });
 
@@ -18,8 +24,13 @@ router.get('/stats',(req,res,next)=>{
   QuizStat.findOne({userId})
     .then(stats =>{
       res.json({recurringCorrect: stats.recurringCorrect, totalQuestions:stats.totalQuestions,totalRight:stats.totalRight});
+    })
+    .catch(err => {
+      if (err.reason === 'Error GET /stats') {
+        return res.status(err.code).json(err);
+      }
+      next(err);
     });
-
 });
 
 router.post('/submit',(req,res,next)=>{
@@ -83,6 +94,12 @@ router.post('/submit',(req,res,next)=>{
               correctAnswer: correctAnswer
             };
             return res.json(response);
+          })
+          .catch(err => {
+            if (err.reason === 'Error Updating /submit') {
+              return res.status(err.code).json(err);
+            }
+            next(err);
           });
       } else {
         // User answered Incorrectly 
@@ -111,7 +128,7 @@ router.post('/submit',(req,res,next)=>{
             return res.json(response);
           })
           .catch(err => {
-            if (err.reason === 'ValidationError') {
+            if (err.reason === 'Error Updating /submit') {
               return res.status(err.code).json(err);
             }
             next(err);
