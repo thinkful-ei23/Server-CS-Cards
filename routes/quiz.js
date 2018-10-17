@@ -54,19 +54,21 @@ router.post('/submit',(req,res,next)=>{
       userQuizData.head = answeredQuestion.next;
       let answeredQuestionIndex = currentHead;
       if ( quizStats.questions[quizStatsHead].answer == answer ) {
-        answeredQuestion.m *= 2;	
+        answeredQuestion.m *= 2;
+        if (answeredQuestion.m >= quizStats.questions.length) {
+          answeredQuestion.m = quizStats.questions.length;
+        }
+        answer = 'correct';
+        userQuizData.totalRight++;
+        userQuizData.recurringCorrect++;
       } else {
-        answeredQuestion.m = 1;
+        answeredQuestion.m = Math.floor(answeredQuestion.m / 2);
+        if (answeredQuestion.m === .5) {
+          answeredQuestion.m = 1; 
+        }
+        answer = 'incorrect';
+        userQuizData.recurringCorrect = 0;
       }
-		
-      let next;
-      // if ( posToInsert >= userQuizData.questions.length ) {
-      //   userQuizData.questions[currentHead].m = userQuizData.questions.length-1;
-      //   userQuizData.questions[lastNode].next = userQuizData.questions[currentHead];
-      //   next = userQuizData.questions[currentHead].next;
-      //   posToInsert = userQuizData.questions.length - 1;
-      // }
-			
       // [{q: A, next: 1, m: 2}, {q: B, next: 2, m: 1 }, {q: C, next: 3, m: 1}, {q:D, next: null, m: 1 } ]
       let currentNode = answeredQuestion;
       for ( let i = 0; i < answeredQuestion.m; i++ ) {
@@ -78,9 +80,7 @@ router.post('/submit',(req,res,next)=>{
       }
       answeredQuestion.next = currentNode.next;
       currentNode.next = answeredQuestionIndex;
-      userQuizData.recurringCorrect++;
       userQuizData.totalQuestions++;
-      userQuizData.totalRight++;
       correctAnswer = userQuizData.questions[currentHead].answer;
       return QuizStat.findOneAndUpdate({ userId }, userQuizData);
     })
@@ -88,7 +88,7 @@ router.post('/submit',(req,res,next)=>{
       
       response = {
         result,
-        answer:'correct',
+        answer: answer,
         correctAnswer: correctAnswer
       };
       return res.json(response);
