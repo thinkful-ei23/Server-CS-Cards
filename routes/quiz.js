@@ -39,36 +39,41 @@ router.post('/submit',(req,res,next)=>{
           lastNode = i;
         }
       }
+      console.log(quizStats.head)
       if ( quizStats.questions[quizStatsHead].answer == answer ) {
         
         let correctAnswer;
         QuizStat.findOne({userId})
           .then(userQuizData => {
             let currentHead = userQuizData.head;
-            userQuizData.questions[currentHead].m = userQuizData.questions[currentHead].m * 2;
+            userQuizData.questions[currentHead].m *= 2;
             let posToInsert = userQuizData.questions[currentHead].m;
-            if ( posToInsert > userQuizData.questions.length ) {
-              userQuizData.questions[currentHead].m = userQuizData.questions.length;
-              userQuizData.questions[lastNode].next = userQuizData.questions;[currentHead];
+            let next;
+            if ( posToInsert >= userQuizData.questions.length ) {
+              userQuizData.questions[currentHead].m = userQuizData.questions.length-1;
+              userQuizData.questions[lastNode].next = userQuizData.questions[currentHead];
+              next = userQuizData.questions[currentHead].next
             }
                 
             let currentNode = userQuizData.questions[currentHead];
             let nextNode = currentNode.next;
-            let count = 0;
-            while (currentNode.next) {
-              if ( count === posToInsert ) {
-                currentNode.next = userQuizData.head;
-              } else {
-                currentNode = userQuizData.questions[currentNode.next];
-                count++;
-              }
+            for(let i=1; i <posToInsert;i++){
+                if(i === posToInsert){
+                    currentNode = userQuizData.head
+                    currentNode.next = userQuizData[i].next
+                    userQuizData[i].next = currentNode.next
+                }else{
+                    currentNode = userQuizData.questions[currentNode.next];                    
+                }
             }
             userQuizData.recurringCorrect++;
             userQuizData.totalQuestions++;
             userQuizData.totalRight++;
-            userQuizData.head = nextNode;
-            userQuizData.questions[lastNode].next = null;
+
+            userQuizData.head = nextNode
+            // userQuizData.questions[lastNode].next = null;
             correctAnswer = userQuizData.questions[currentHead].answer;
+            console.log(userQuizData)
             return QuizStat.findOneAndUpdate({userId},userQuizData);
           })
           .then( result => {

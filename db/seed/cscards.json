@@ -19,7 +19,7 @@
     "answer": "stack",
     "next":3,
     "m":1
-  },
+  }, 
   {
     "number": 4,
     "question": "A data structure where each element is a seperate object.  Each element(call it a node) of a list is comprising of two items - the data and a reference to the next node.",
@@ -90,4 +90,5 @@
     "next":null,
     "m":1
   }
+
 ]
