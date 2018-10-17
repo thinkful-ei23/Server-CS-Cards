@@ -17,7 +17,7 @@ mongoose.connect(MONGODB_URI)
     ]);
   })
   .then((results) => {
-    console.log(results);
+    console.log(`inserted ${results.length} users`);
   })
   .then(() => mongoose.disconnect())
   .catch(err => {

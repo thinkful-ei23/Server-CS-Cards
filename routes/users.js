@@ -128,7 +128,7 @@ router.post('/stats',(req,res,next)=>{
       head:0,
       totalRight:0,
       quizStat:{}
-    })
+    });
   })
     
   .then(result => {
