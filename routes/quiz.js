@@ -9,7 +9,6 @@ router.get('/quiz',(req,res,next)=>{
   const userId = req.user._id;
   QuizStat.findOne({userId})
     .then(result=> {
-      console.log(result.head, 'HEAD', result.questions.slice(0,4));
       res.json(result.questions[result.head].question);
     })
     .catch(err => {
@@ -65,7 +64,6 @@ router.post('/submit',(req,res,next)=>{
         answer = 'incorrect';
         userQuizData.recurringCorrect = 0;
       }
-      // [{q: A, next: 1, m: 2}, {q: B, next: 2, m: 1 }, {q: C, next: 3, m: 1}, {q:D, next: null, m: 1 } ]
       let currentNode = answeredQuestion;
       for ( let i = 0; i < answeredQuestion.m; i++ ) {
         const nextIndex = currentNode.next;
