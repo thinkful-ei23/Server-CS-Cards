@@ -45,7 +45,7 @@ router.post('/submit',(req,res,next)=>{
         let correctAnswer;
         QuizStat.findOne({userId})
           .then(userQuizData => {
-            let currentHead = userQuizData.head;
+            let currentHead = userQuizData.head; // 0
             userQuizData.questions[currentHead].m *= 2;
             let posToInsert = userQuizData.questions[currentHead].m;
             let next;
@@ -57,11 +57,11 @@ router.post('/submit',(req,res,next)=>{
                 
             let currentNode = userQuizData.questions[currentHead];
             let nextNode = currentNode.next;
+            
             for(let i=1; i <posToInsert;i++){
                 if(i === posToInsert){
-                    currentNode = userQuizData.head
-                    currentNode.next = userQuizData[i].next
-                    userQuizData[i].next = currentNode.next
+                    currentNode = userQuizData.head // 0             posToinsert is 2     question 1,2
+                    // postoinserts nodes .next to currenNode
                 }else{
                     currentNode = userQuizData.questions[currentNode.next];                    
                 }
