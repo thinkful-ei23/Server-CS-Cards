@@ -53,8 +53,11 @@ router.post('/submit',(req,res,next)=>{
       let answeredQuestion = userQuizData.questions[currentHead];
       userQuizData.head = answeredQuestion.next;
       let answeredQuestionIndex = currentHead;
-      if ( quizStats.questions[quizStatsHead].answer == answer ) {}
-      answeredQuestion.m *= 2;
+      if ( quizStats.questions[quizStatsHead].answer == answer ) {
+        answeredQuestion.m *= 2;	
+      } else {
+        answeredQuestion.m = 1;
+      }
 		
       let next;
       // if ( posToInsert >= userQuizData.questions.length ) {
