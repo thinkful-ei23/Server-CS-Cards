@@ -9,6 +9,7 @@ router.get('/quiz',(req,res,next)=>{
   const userId = req.user._id;
   QuizStat.findOne({userId})
     .then(result=> {
+      console.log(result.head, 'HEAD', result.questions.slice(0,4));
       res.json(result.questions[result.head].question);
     })
     .catch(err => {
@@ -40,101 +41,64 @@ router.post('/submit',(req,res,next)=>{
   const userId = req.user._id;
   let quizStats;
   let response;
+  let correctAnswer;
   QuizStat.findOne({ userId })
-    .then( result => {
-      quizStats = result;
-      let lastNode; 
+    .then( userQuizData => {
+      quizStats = userQuizData;
+      
       let quizStatsHead = quizStats.head;
-      for( let i = 0; i < quizStats.questions.length; i++ ) {
-        if ( quizStats.questions[i].next === null ) {
-          lastNode = i;
-        }
-      }
-      console.log(quizStats.head)
-      if ( quizStats.questions[quizStatsHead].answer == answer ) {
+      
         
-        let correctAnswer;
-        QuizStat.findOne({userId})
-          .then(userQuizData => {
-            let currentHead = userQuizData.head; // 0
-            userQuizData.questions[currentHead].m *= 2;
-            let posToInsert = userQuizData.questions[currentHead].m;
-            let next;
-            if ( posToInsert >= userQuizData.questions.length ) {
-              userQuizData.questions[currentHead].m = userQuizData.questions.length-1;
-              userQuizData.questions[lastNode].next = userQuizData.questions[currentHead];
-              next = userQuizData.questions[currentHead].next
-            }
-                
-            let currentNode = userQuizData.questions[currentHead];
-            let nextNode = currentNode.next;
-            
-            for(let i=1; i <posToInsert;i++){
-                if(i === posToInsert){
-                    currentNode = userQuizData.head // 0             posToinsert is 2     question 1,2
-                    // postoinserts nodes .next to currenNode
-                }else{
-                    currentNode = userQuizData.questions[currentNode.next];                    
-                }
-            }
-            userQuizData.recurringCorrect++;
-            userQuizData.totalQuestions++;
-            userQuizData.totalRight++;
-
-            userQuizData.head = nextNode
-            // userQuizData.questions[lastNode].next = null;
-            correctAnswer = userQuizData.questions[currentHead].answer;
-            console.log(userQuizData)
-            return QuizStat.findOneAndUpdate({userId},userQuizData);
-          })
-          .then( result => {
-            response = {
-              result,
-              answer:'correct',
-              correctAnswer: correctAnswer
-            };
-            return res.json(response);
-          })
-          .catch(err => {
-            if (err.reason === 'Error Updating /submit') {
-              return res.status(err.code).json(err);
-            }
-            next(err);
-          });
-      } else {
-        // User answered Incorrectly 
-        let correctAnswer;
-        QuizStat.findOne({ userId })
-          .then(userQuizData => {
-            
-            let currentHead = userQuizData.head;
-            userQuizData.questions[currentHead].m = 1; 
-            userQuizData.recurringCorrect = 0;
-            userQuizData.totalQuestions++;
-            let posToInsert = 1;
-            userQuizData.head = userQuizData.questions[currentHead].next;
-            let currentHeadNext = userQuizData.questions[userQuizData.head].next;
-            userQuizData.questions[userQuizData.head].next = currentHead;
-            userQuizData.questions[currentHead].next = currentHeadNext;
-            correctAnswer = userQuizData.questions[currentHead].answer;
-            return QuizStat.findOneAndUpdate({userId}, userQuizData);
-          })
-          .then( result => {
-            response = {
-              result,
-              answer:'incorrect',
-              correctAnswer: correctAnswer
-            };
-            return res.json(response);
-          })
-          .catch(err => {
-            if (err.reason === 'Error Updating /submit') {
-              return res.status(err.code).json(err);
-            }
-            next(err);
-          });
-      }	
+      let currentHead = userQuizData.head; // 0
+      let answeredQuestion = userQuizData.questions[currentHead];
+      userQuizData.head = answeredQuestion.next;
+      let answeredQuestionIndex = currentHead;
+      if ( quizStats.questions[quizStatsHead].answer == answer ) {}
+      answeredQuestion.m *= 2;
+		
+      let next;
+      // if ( posToInsert >= userQuizData.questions.length ) {
+      //   userQuizData.questions[currentHead].m = userQuizData.questions.length-1;
+      //   userQuizData.questions[lastNode].next = userQuizData.questions[currentHead];
+      //   next = userQuizData.questions[currentHead].next;
+      //   posToInsert = userQuizData.questions.length - 1;
+      // }
+			
+      // [{q: A, next: 1, m: 2}, {q: B, next: 2, m: 1 }, {q: C, next: 3, m: 1}, {q:D, next: null, m: 1 } ]
+      let currentNode = answeredQuestion;
+      for ( let i = 0; i < answeredQuestion.m; i++ ) {
+        const nextIndex = currentNode.next;
+        if (currentNode.next === null) {
+          break;
+        }
+        currentNode = userQuizData.questions[nextIndex];
+      }
+      answeredQuestion.next = currentNode.next;
+      currentNode.next = answeredQuestionIndex;
+      userQuizData.recurringCorrect++;
+      userQuizData.totalQuestions++;
+      userQuizData.totalRight++;
+      correctAnswer = userQuizData.questions[currentHead].answer;
+      return QuizStat.findOneAndUpdate({ userId }, userQuizData);
+    })
+    .then( result => {
+      
+      response = {
+        result,
+        answer:'correct',
+        correctAnswer: correctAnswer
+      };
+      return res.json(response);
+    })
+    .catch(err => {
+      if (err.reason === 'Error Updating /submit') {
+        return res.status(err.code).json(err);
+      }
+      next(err);
     });
+    
 });
+
+
 
 module.exports = router;
