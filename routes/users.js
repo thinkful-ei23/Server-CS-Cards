@@ -3,13 +3,13 @@
 const express = require('express');
 
 const User = require('../models/user');
-const QuizStat = require('../models/quizStat')
+const QuizStat = require('../models/quizStat');
 const cscards = require('./../db/seed/cscards.json');
 
 const router = express.Router();
 
 router.post('/users', (req, res, next) => {
-  const { firstName, lastName, username, password } = req.body;
+  const { firstName, username, password } = req.body;
   const requiredFields = ['username', 'password'];
   const missingField = requiredFields.find(field => !(field in req.body));
 
@@ -21,7 +21,7 @@ router.post('/users', (req, res, next) => {
       location: missingField
     });
   }
-  const stringFields = ['username', 'password', 'firstname', 'lastname'];
+  const stringFields = ['username', 'password', 'firstname'];
   const nonStringField = stringFields.find(
     field => field in req.body && typeof req.body[field] !== 'string'
   );
@@ -35,7 +35,7 @@ router.post('/users', (req, res, next) => {
     });
   }
   
-  const explicityTrimmedFields = ['username', 'password', 'firstName', 'lastName'];
+  const explicityTrimmedFields = ['username', 'password', 'firstName'];
   const nonTrimmedField = explicityTrimmedFields.find(
     field => req.body[field].trim() !== req.body[field]
   );
@@ -101,7 +101,6 @@ router.post('/users', (req, res, next) => {
         username,
         password: hash,
         firstName: firstName.trim(),
-        lastName: lastName.trim()
       });
     }) 
     .then(result => {
@@ -119,28 +118,28 @@ router.post('/stats',(req,res,next)=>{
 
   const {username} = req.body;
   return User.findOne({username})
-  .then(user =>{
-    return QuizStat.create({
-      userId: user._id,
-      recurringCorrect: 0,
-      totalQuestions:0,
-      questions:cscards,
-      head:0,
-      totalRight:0,
-      quizStat:{}
-    });
-  })
+    .then(user =>{
+      return QuizStat.create({
+        userId: user._id,
+        recurringCorrect: 0,
+        totalQuestions:0,
+        questions:cscards,
+        head:0,
+        totalRight:0,
+        quizStat:{}
+      });
+    })
     
-  .then(result => {
-    return res.status(201).location('/api/users/${result.id}').json(result);
-  })
-  .catch(err => {
-    if (err.reason === 'ValidationError') {
-      return res.status(err.code).json(err);
-    }
-    next(err);
-  });
-})
+    .then(result => {
+      return res.status(201).location('/api/users/${result.id}').json(result);
+    })
+    .catch(err => {
+      if (err.reason === 'ValidationError') {
+        return res.status(err.code).json(err);
+      }
+      next(err);
+    });
+});
 
 
 
