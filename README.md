@@ -4,10 +4,10 @@
 
 
 ## Summary
-CS cards is a interactive learning app using space repetition that will allow you to quickly and effectively learn many of those hard to grasp Computer Science concepts!
-Simply create a account and start quizzing yourself.
+CS cards is a learning app built with a custom spaced-repetition algorithm using a mongoDB singly-linked-list.  CS Cards is made for early Computer Science learners struggling to learn CS Algorithms and Data Structures.
 
-## Features
+## Spaced-Repetition
+Spaced repetition is a method for efficient learning that has you practice concepts or skills over increasing periods of time. It's based on the notion of a "forgetting curve," or the idea that over time, if we don't actively use or reflect on something we know, our knowledge decays. With spaced repetition, we stay ahead of that moment of forgetting by being exposed to the concepts we struggle with more often.
 
 ## Tech Used
 
@@ -27,7 +27,7 @@ Simply create a account and start quizzing yourself.
 * Mongoose
 * Passport
 * Bcryptjs
-* JSONwebToken
+* JWT
 * Morgan
 * mLab
 
