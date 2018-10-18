@@ -2,7 +2,6 @@
 
 [Demo CS Cards App Here](https://client-cs-cards.herokuapp.com/)
 
-
 ## Summary
 CS cards is a learning app built with a custom spaced-repetition algorithm using a mongoDB singly-linked-list.  CS Cards is made for early Computer Science learners struggling to learn CS Algorithms and Data Structures.
 
@@ -30,7 +29,6 @@ Spaced repetition is a method for efficient learning that has you practice conce
 * JWT
 * Morgan
 * mLab
-
 
 ### Deployment
 * Heroku
