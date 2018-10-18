@@ -78,7 +78,6 @@ router.post('/submit',(req,res,next)=>{
       return QuizStat.findOneAndUpdate({ userId }, userQuizData);
     })
     .then( result => {
-      
       response = {
         result,
         answer: answer,
@@ -92,9 +91,6 @@ router.post('/submit',(req,res,next)=>{
       }
       next(err);
     });
-    
 });
-
-
 
 module.exports = router;
