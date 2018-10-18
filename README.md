@@ -38,3 +38,7 @@ Spaced repetition is a method for efficient learning that has you practice conce
 
 ## API Documentation
 [Click to view API documentation](https://documenter.getpostman.com/view/4458639/RWgrxxhd)
+
+### Developers
+* Jacob MacInnis
+* John Cosgrove
