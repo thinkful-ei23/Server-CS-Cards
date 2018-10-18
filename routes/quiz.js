@@ -1,11 +1,20 @@
 'use strict';
 const express = require('express');
+const mongoose = require('mongoose');
 const QuizStat = require('../models/quizStat');
 
 const router = express.Router();
 
+/*======GET Endpoint for quiz questions=====*/
 router.get('/quiz',(req,res,next)=>{
   const userId = req.user._id;
+	
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    const err = new Error('The `id` is not valid');
+    err.status = 400;
+    return next(err);
+  }
+
   QuizStat.findOne({userId})
     .then(result=> {
       res.json(result.questions[result.head].question);
@@ -18,8 +27,16 @@ router.get('/quiz',(req,res,next)=>{
     });
 });
 
+/*======GET Endpoint for user stats=======*/
 router.get('/stats',(req,res,next)=>{
   const userId = req.user._id;
+	
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    const err = new Error('The `id` is not valid');
+    err.status = 400;
+    return next(err);
+  }
+
   QuizStat.findOne({userId})
     .then(stats =>{
       res.json({recurringCorrect: stats.recurringCorrect, totalQuestions:stats.totalQuestions,totalRight:stats.totalRight});
@@ -32,11 +49,19 @@ router.get('/stats',(req,res,next)=>{
     });
 });
 
+/*=====POST Submiting answer endpoint Spaced Repetition Alogrithm====*/
 router.post('/submit',(req,res,next)=>{
 
   let { answer } = req.body;
   answer = answer.toLowerCase().trim(' ');
   const userId = req.user._id;
+	
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    const err = new Error('The `id` is not valid');
+    err.status = 400;
+    return next(err);
+  }
+
   let response;
   let correctAnswer;
 	
@@ -47,6 +72,7 @@ router.post('/submit',(req,res,next)=>{
       let answeredQuestion = userQuizData.questions[currentHead];
       userQuizData.head = answeredQuestion.next;
       let answeredQuestionIndex = currentHead;
+      // When user answers question correct we double m value to put question deeper in the list.  When incorrect we dived the m value to have it show up sooner.
       if ( userQuizData.questions[quizStatsHead].answer == answer ) {
         answeredQuestion.m *= 2;
         if (answeredQuestion.m >= userQuizData.questions.length) {
