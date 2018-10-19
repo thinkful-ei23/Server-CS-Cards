@@ -6,7 +6,7 @@ const cors = require('cors');
 
 var socket = require('socket.io');
 
-const { CLIENT_ORIGIN, PORT, MONGODB_URI } = require('./config');
+const { CLIENT_ORIGIN, PORT, MONGODB_URI, SOCKET_PORT } = require('./config');
 const passport = require('passport');
 const localStrategy = require('./passport/local');
 const jwtStrategy = require('./passport/jwt');
@@ -87,7 +87,7 @@ if (process.env.NODE_ENV !== 'test') {
     });
 }
 /*====Socket.io Server====*/
-let server = app.listen(5000, function(){
+let server = app.listen(SOCKET_PORT, function(){
   console.log('server is running on port 5000');
 });
 
