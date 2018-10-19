@@ -4,6 +4,8 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
+var socket = require('socket.io');
+
 const { CLIENT_ORIGIN, PORT, MONGODB_URI } = require('./config');
 const passport = require('passport');
 const localStrategy = require('./passport/local');
@@ -84,6 +86,21 @@ if (process.env.NODE_ENV !== 'test') {
       });
     });
 }
+/*====Socket.io Server====*/
+let server = app.listen(5000, function(){
+  console.log('server is running on port 5000');
+});
+
+let io = socket(server);
+
+io.on('connection', (socket) => {
+  console.log(socket.id);
+
+  socket.on('SEND_MESSAGE', function(data){
+    console.log(data)
+    io.emit('RECEIVE_MESSAGE', data);
+  });
+});
 
 /*======= Export for testing =======*/
 module.exports = app;
