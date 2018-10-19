@@ -87,12 +87,10 @@ if (process.env.NODE_ENV !== 'test') {
     });
 }
 /*====Socket.io Server====*/
-<<<<<<< HEAD
+
 let server = app.listen(SOCKET_PORT, function(){
-=======
-let server = app.listen(PORT, function(){
->>>>>>> e64fb271e9cf33f5076a9f3c674eb5eb8308c76d
-  console.log('server is running on port 5000');
+
+  console.log('server is running on port 8081');
 });
 
 let io = socket(server);
