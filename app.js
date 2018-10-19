@@ -6,7 +6,7 @@ const cors = require('cors');
 
 var socket = require('socket.io');
 
-const { CLIENT_ORIGIN, PORT, MONGODB_URI, SOCKET_PORT } = require('./config');
+const { CLIENT_ORIGIN, PORT, MONGODB_URI } = require('./config');
 const passport = require('passport');
 const localStrategy = require('./passport/local');
 const jwtStrategy = require('./passport/jwt');
@@ -84,23 +84,19 @@ if (process.env.NODE_ENV !== 'test') {
       }).on('error', err => {
         console.error(err);
       });
+      /*====Socket.io Server====*/
+      let io = socket(server);
 
-let io = socket(server);
+      io.on('connection', (socket) => {
+        console.log(socket.id, 'socket ID');
 
-io.on('connection', (socket) => {
-  console.log(socket.id, 'socket ID');
-
-  socket.on('SEND_MESSAGE', function(data){
-    console.log(data, 'Messaged recieved!')
-    io.emit('RECEIVE_MESSAGE', data);
-  });
-});
+        socket.on('SEND_MESSAGE', function(data){
+          console.log(data, 'Messaged recieved!');
+          io.emit('RECEIVE_MESSAGE', data);
+        });
+      });
     });
 }
-/*====Socket.io Server====*/
-
-
-
 
 /*======= Export for testing =======*/
 module.exports = app;
