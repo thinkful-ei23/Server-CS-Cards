@@ -51,13 +51,17 @@ router.get('/stats',(req,res,next)=>{
 
 /*=====POST Submiting answer endpoint Spaced Repetition Alogrithm====*/
 router.post('/submit',(req,res,next)=>{
-
   let { answer } = req.body;
   answer = answer.toLowerCase().trim(' ');
   const userId = req.user._id;
 	
   if (!mongoose.Types.ObjectId.isValid(userId)) {
     const err = new Error('The `id` is not valid');
+    err.status = 400;
+    return next(err);
+  }
+  if (!answer) {
+    const err = new Error('Missing `answer` on Submit');
     err.status = 400;
     return next(err);
   }
