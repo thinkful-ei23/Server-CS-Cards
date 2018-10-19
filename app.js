@@ -87,7 +87,7 @@ if (process.env.NODE_ENV !== 'test') {
     });
 }
 /*====Socket.io Server====*/
-let server = app.listen(5000, function(){
+let server = app.listen(PORT, function(){
   console.log('server is running on port 5000');
 });
 
