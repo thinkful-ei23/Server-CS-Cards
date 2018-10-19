@@ -79,30 +79,28 @@ if (process.env.NODE_ENV !== 'test') {
       console.error(err);
     })
     .then(() => {
-      app.listen(PORT, function () {
+      let server = app.listen(PORT, function () {
         console.info(`Server listening on ${this.address().port}`);
       }).on('error', err => {
         console.error(err);
       });
-    });
-}
-/*====Socket.io Server====*/
-
-let server = app.listen(SOCKET_PORT, function(){
-
-  console.log(`server is running on port ${SOCKET_PORT}`);
-});
 
 let io = socket(server);
 
 io.on('connection', (socket) => {
-  console.log(socket.id);
+  console.log(socket.id, 'socket ID');
 
   socket.on('SEND_MESSAGE', function(data){
-    console.log(data)
+    console.log(data, 'Messaged recieved!')
     io.emit('RECEIVE_MESSAGE', data);
   });
 });
+    });
+}
+/*====Socket.io Server====*/
+
+
+
 
 /*======= Export for testing =======*/
 module.exports = app;
