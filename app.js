@@ -12,7 +12,7 @@ const jwtStrategy = require('./passport/jwt');
 /*=====Import Routers=====*/
 const usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
-const quizRouter = require('./routes/quiz')
+const quizRouter = require('./routes/quiz');
 
 /*=========Create Express Application========*/
 const app = express();
@@ -26,7 +26,7 @@ app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'common', {
 const corsOption = { 
   origin: true, methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true
-  }; app.use(cors(corsOption));
+}; app.use(cors(corsOption));
 
 /*=======Parse Request Body======*/
 app.use(express.json());

@@ -125,8 +125,7 @@ router.post('/stats',(req,res,next)=>{
         totalQuestions:0,
         questions:cscards,
         head:0,
-        totalRight:0,
-        quizStat:{}
+        totalRight:0
       });
     })
     

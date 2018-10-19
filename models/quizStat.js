@@ -7,8 +7,7 @@ const quizStatSchema = new mongoose.Schema({
   totalQuestions :{type: Number},
   totalRight:{type:Number},
   questions:{type:Array},
-  head:{type:Number},
-  quizStat: {type: Object}
+  head:{type:Number}
 });
 
 quizStatSchema.set('toObject', {
