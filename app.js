@@ -90,7 +90,7 @@ if (process.env.NODE_ENV !== 'test') {
 
 let server = app.listen(SOCKET_PORT, function(){
 
-  console.log('server is running on port 8081');
+  console.log(`server is running on port ${SOCKET_PORT}`);
 });
 
 let io = socket(server);
