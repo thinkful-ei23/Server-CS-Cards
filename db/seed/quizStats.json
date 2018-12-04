@@ -1,0 +1,302 @@
+[ 
+  {
+    "userId": "000000000000000000000001",
+    "recurringCorrect": 0,
+    "totalQuestions": 0,
+    "totalRight":0,
+    "questions":[
+      { 
+        "number": 1,
+        "question": "A data structure that follows First-In-First-Out methodology, i.e., the data item stored first will be accessed first",
+        "answer": "queue",
+        "next":1,
+        "m":1
+      },
+      { 
+        "number": 2,
+        "question": "A data structure consisting of a collection of elements (values or variables), each identified by at least one index",
+        "answer": "array",
+        "next":2,
+        "m":1
+      },
+      {
+        "number": 3,
+        "question": "A data structure that follows a particular order in which the operations are performed.  The order is either LIFO(Last In First Out) or FILO(First In Last Out)",
+        "answer": "stack",
+        "next":3,
+        "m":1
+      }, 
+      {
+        "number": 4,
+        "question": "A data structure where each element is a seperate object.  Each element(call it a node) of a list is comprising of two items - the data and a reference to the next node.",
+        "answer": "linked list",
+        "next":4,
+        "m":1
+      },
+      {
+        "number": 5,
+        "question": "A data structure that implements an associative array that can map keys to values.  uses a hash function to compute an index",
+        "answer": "hash table",
+        "next":5,
+        "m":1
+      },
+      {
+        "number": 6,
+        "question": "Data structures that consist of nodes which are linked together in a certain way. These nodes have a tree like parent-child releationship",
+        "answer": "binary tree",
+        "next":6,
+        "m":1
+      },
+      {
+        "number": 7,
+        "question": "A searching algorythm that has a O(n) time complexity. It looks at each item in an array until it finds what you are looking for.",
+        "answer": "linear",
+        "next":7,
+        "m":1
+      }, 
+      {
+        "number": 8,
+        "question": "Searching algorythm that has a O(log(n)) time complexity and splits the array range in half each time it checks an item. This algorythm only works with sorted arrays.",
+        "answer": "binary",
+        "next":8,
+        "m":1
+      }, 
+      {
+        "number": 9,
+        "question": "A searching algorythm used to search through a tree that traverses as far down the tree before back-tracking.",
+        "answer": "depth first",
+        "next":9,
+        "m":1
+      },
+      {
+        "number": 10,
+        "question": "A searching algorythm used in trees that traverses by completing each row before going deeper to the next row.",
+        "answer": "breath first",
+        "next":10,
+        "m":1
+      },
+      {
+        "number": 11,
+        "question": "An array sorting algorithm (sometimes called 'Sinking Sort') that iterates through an aray and compares two values, moving the larger to the right. It has a O notation of O(n^2).",
+        "answer": "bubble sort",
+        "next":11,
+        "m":1
+      },
+      {
+        "number": 12,
+        "question": "A sorting algorithm that uses a divide and conquer approach.  It breaks the array down into continually smaller chunks, then merges them back together in the correct order. It has time complexity of O(nlog(n)). ",
+        "answer": "merge sort",
+        "next":12,
+        "m":1
+      }, 
+      {
+        "number": 13,
+        "question": "A sorting algorithm that uses divide and conquer approach. It can opperate within an array and does not need extra memory to store values.  It has an best and average case performace of O(nlog(n)) and worst case O(n^2)",
+        "answer": "quicksort",
+        "next":null,
+        "m":1
+      }
+    ],
+    "head": 0
+  },
+  {
+    "userId": "000000000000000000000002",
+    "recurringCorrect": 0,
+    "totalQuestions": 0,
+    "totalRight":0,
+    "questions":[
+      { 
+        "number": 1,
+        "question": "A data structure that follows First-In-First-Out methodology, i.e., the data item stored first will be accessed first",
+        "answer": "queue",
+        "next":1,
+        "m":1
+      },
+      { 
+        "number": 2,
+        "question": "A data structure consisting of a collection of elements (values or variables), each identified by at least one index",
+        "answer": "array",
+        "next":2,
+        "m":1
+      },
+      {
+        "number": 3,
+        "question": "A data structure that follows a particular order in which the operations are performed.  The order is either LIFO(Last In First Out) or FILO(First In Last Out)",
+        "answer": "stack",
+        "next":3,
+        "m":1
+      }, 
+      {
+        "number": 4,
+        "question": "A data structure where each element is a seperate object.  Each element(call it a node) of a list is comprising of two items - the data and a reference to the next node.",
+        "answer": "linked list",
+        "next":4,
+        "m":1
+      },
+      {
+        "number": 5,
+        "question": "A data structure that implements an associative array that can map keys to values.  uses a hash function to compute an index",
+        "answer": "hash table",
+        "next":5,
+        "m":1
+      },
+      {
+        "number": 6,
+        "question": "Data structures that consist of nodes which are linked together in a certain way. These nodes have a tree like parent-child releationship",
+        "answer": "binary tree",
+        "next":6,
+        "m":1
+      },
+      {
+        "number": 7,
+        "question": "A searching algorythm that has a O(n) time complexity. It looks at each item in an array until it finds what you are looking for.",
+        "answer": "linear",
+        "next":7,
+        "m":1
+      }, 
+      {
+        "number": 8,
+        "question": "Searching algorythm that has a O(log(n)) time complexity and splits the array range in half each time it checks an item. This algorythm only works with sorted arrays.",
+        "answer": "binary",
+        "next":8,
+        "m":1
+      }, 
+      {
+        "number": 9,
+        "question": "A searching algorythm used to search through a tree that traverses as far down the tree before back-tracking.",
+        "answer": "depth first",
+        "next":9,
+        "m":1
+      },
+      {
+        "number": 10,
+        "question": "A searching algorythm used in trees that traverses by completing each row before going deeper to the next row.",
+        "answer": "breath first",
+        "next":10,
+        "m":1
+      },
+      {
+        "number": 11,
+        "question": "An array sorting algorithm (sometimes called 'Sinking Sort') that iterates through an aray and compares two values, moving the larger to the right. It has a O notation of O(n^2).",
+        "answer": "bubble sort",
+        "next":11,
+        "m":1
+      },
+      {
+        "number": 12,
+        "question": "A sorting algorithm that uses a divide and conquer approach.  It breaks the array down into continually smaller chunks, then merges them back together in the correct order. It has time complexity of O(nlog(n)). ",
+        "answer": "merge sort",
+        "next":12,
+        "m":1
+      }, 
+      {
+        "number": 13,
+        "question": "A sorting algorithm that uses divide and conquer approach. It can opperate within an array and does not need extra memory to store values.  It has an best and average case performace of O(nlog(n)) and worst case O(n^2)",
+        "answer": "quicksort",
+        "next":null,
+        "m":1
+      }
+    ],
+    "head": 0
+  },
+  {
+    "userId": "000000000000000000000003",
+    "recurringCorrect": 0,
+    "totalQuestions": 0,
+    "totalRight":0,
+    "questions":[
+      { 
+        "number": 1,
+        "question": "A data structure that follows First-In-First-Out methodology, i.e., the data item stored first will be accessed first",
+        "answer": "queue",
+        "next":1,
+        "m":1
+      },
+      { 
+        "number": 2,
+        "question": "A data structure consisting of a collection of elements (values or variables), each identified by at least one index",
+        "answer": "array",
+        "next":2,
+        "m":1
+      },
+      {
+        "number": 3,
+        "question": "A data structure that follows a particular order in which the operations are performed.  The order is either LIFO(Last In First Out) or FILO(First In Last Out)",
+        "answer": "stack",
+        "next":3,
+        "m":1
+      }, 
+      {
+        "number": 4,
+        "question": "A data structure where each element is a seperate object.  Each element(call it a node) of a list is comprising of two items - the data and a reference to the next node.",
+        "answer": "linked list",
+        "next":4,
+        "m":1
+      },
+      {
+        "number": 5,
+        "question": "A data structure that implements an associative array that can map keys to values.  uses a hash function to compute an index",
+        "answer": "hash table",
+        "next":5,
+        "m":1
+      },
+      {
+        "number": 6,
+        "question": "Data structures that consist of nodes which are linked together in a certain way. These nodes have a tree like parent-child releationship",
+        "answer": "binary tree",
+        "next":6,
+        "m":1
+      },
+      {
+        "number": 7,
+        "question": "A searching algorythm that has a O(n) time complexity. It looks at each item in an array until it finds what you are looking for.",
+        "answer": "linear",
+        "next":7,
+        "m":1
+      }, 
+      {
+        "number": 8,
+        "question": "Searching algorythm that has a O(log(n)) time complexity and splits the array range in half each time it checks an item. This algorythm only works with sorted arrays.",
+        "answer": "binary",
+        "next":8,
+        "m":1
+      }, 
+      {
+        "number": 9,
+        "question": "A searching algorythm used to search through a tree that traverses as far down the tree before back-tracking.",
+        "answer": "depth first",
+        "next":9,
+        "m":1
+      },
+      {
+        "number": 10,
+        "question": "A searching algorythm used in trees that traverses by completing each row before going deeper to the next row.",
+        "answer": "breath first",
+        "next":10,
+        "m":1
+      },
+      {
+        "number": 11,
+        "question": "An array sorting algorithm (sometimes called 'Sinking Sort') that iterates through an aray and compares two values, moving the larger to the right. It has a O notation of O(n^2).",
+        "answer": "bubble sort",
+        "next":11,
+        "m":1
+      },
+      {
+        "number": 12,
+        "question": "A sorting algorithm that uses a divide and conquer approach.  It breaks the array down into continually smaller chunks, then merges them back together in the correct order. It has time complexity of O(nlog(n)). ",
+        "answer": "merge sort",
+        "next":12,
+        "m":1
+      }, 
+      {
+        "number": 13,
+        "question": "A sorting algorithm that uses divide and conquer approach. It can opperate within an array and does not need extra memory to store values.  It has an best and average case performace of O(nlog(n)) and worst case O(n^2)",
+        "answer": "quicksort",
+        "next":null,
+        "m":1
+      }
+    ],
+    "head": 0
+  }
+]
